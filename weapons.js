@@ -1,5 +1,5 @@
 // -------------------Armas------------------------
-const weapons = [
+export const weapons = [
 kitchenKnife = {
     nombre : 'Kitchen Knife',
     level:0,
@@ -56,6 +56,4 @@ dagger = {
     attack:15
 }]
 
-module.exports = {
-    weapons
-}
+
