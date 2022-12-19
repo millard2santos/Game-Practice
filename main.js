@@ -2,11 +2,6 @@ const { weapons } = require("./weapons")
 
 
 
-
-
-
-
-
 const player = {
     nombre: 'Player',
     weapon: 'fist',
@@ -22,12 +17,12 @@ const player = {
         return
     },
     specialAttack(obj) {
-        obj.Hp -= this.attack *1.5
+        obj.Hp -= this.attack * 1.5
         this.energy -= 15
         return
     },
     ultimateAttack(obj) {
-        obj.Hp -= this.attack *3
+        obj.Hp -= this.attack * 3
         this.energy -= 40
         return
     },
@@ -37,7 +32,7 @@ const player = {
     },
     heal() {
         console.log(`Has recuperado 50 de Hp`)
-        (this.Hp + 50 > 100) ? this.Hp = 100 : this.Hp += 50
+            (this.Hp + 50 > 100) ? this.Hp = 100 : this.Hp += 50
         return
     }
 
@@ -48,38 +43,91 @@ const enemy = {
     attack: 10,
 }
 
-const combat = (s) =>{
+const combat = () => {
 
-    switch(s){
-        case 'Attack':
+    switch (s) {
+        case 'attack':
             player.normalAttack(enemy)
             break;
-        case 'Special':
+        case 'special':
             player.specialAttack(enemy)
             break;
-        case 'Ultimate':
+        case 'ultimate':
             player.ultimateAttack(enemy)
             break;
-        case 'Recharge':
+        case 'recharge':
             player.rechargeEnergy()
             break;
-        case 'Heal':
+        case 'heal':
             player.heal()
             break;
     }
 }
 
-const shop = (arr,obj)  => {
-    const list = arr.filter( x => x.level <= obj.level)
+const shop = (arr, player) => {
+    const list = arr.filter(x => x.level <= player.level)
     alert('Bienvenido a la tienda! \n ')
     list.forEach(e => {
-        console.log(list.indexOf(e + 1),e.nombre, `attack: ${e.attack}`)
+        console.log(list.indexOf(e + 1), e.nombre, `attack: ${e.attack}`)
     });
-    const pick = prompt('Estos son los articulos, escribe su numero para comprarlo!')
-    obj.weapon = list
+    const pick = () => {
+        const pick = parseInt(prompt('Estos son los articulos, escribe su numero para comprarlo!'))
+        if (!pick && (pick < 1 && pick > list.length)) {
+            player.weapon = list[pick - 1].nombre
+            player.attack = list[pick - 1].attack
+            return `Muchas gracias!!`
+        }
+        clear();
+        console.log('Respuesta no valida, intente denuevo')
+        return pick()
 
+    }
+    pick()
 
 }
-const stats = ()  => {
-     
+const stats = () => {
+    alert(`Estas son tus estadisticas! \n 
+           Hp: ${player.Hp}, attack: ${player.attack}\n
+           energy: ${player.energy} shield: ${player.shield} \n level: ${player.level}`)
+
+}
+
+const healingElves = () => {
+    player.Hp = 100
+    player.energy = 70
+}
+
+
+const mainMenu = () => {
+    const answer = parseInt(prompt('Que quieres hacer ahora? Escribe el numero \n 1. Coliseo \n 2. Tienda\n 3. Estadisticas\n 4. Curar heridas'))
+    return answer
+}
+
+// --------------------------------------Juego---------------------------
+
+
+console.log('Bienvenido a GammaTech World!');
+while (player.Hp > 0) {
+    clear()
+    console.log('Estas en las calles de la ciudad de Andadela!')
+    mainMenu()
+    if (!mainMenu() && mainMenu() <= 4 && mainMenu() >= 1) {
+
+        switch (mainMenu()) {
+            case '1':
+                combat()
+                break;
+            case '2':
+                shop()
+                break;
+            case '3':
+                stats()
+                break;
+            case '4':
+                healingElves()
+                break;
+            default:
+                console.log('Respuesta invalida, intente denuevo')
+        }
+    }
 }
