@@ -1,3 +1,5 @@
+const { weapons } = require("./weapons")
+
 
 
 
@@ -11,7 +13,7 @@ const player = {
     Hp: 100,
     attack: 10,
     energy: 70,
-    kills: 0,
+    level: 0,
     heal: 50,
     shield: 0,
     normalAttack(obj) {
@@ -67,9 +69,17 @@ const combat = (s) =>{
     }
 }
 
-const shop = (s)  => {
-     const random =  Math.floor(Math.random() * (weapons.length - 1))
+const shop = (arr,obj)  => {
+    const list = arr.filter( x => x.level <= obj.level)
+    alert('Bienvenido a la tienda! \n ')
+    list.forEach(e => {
+        console.log(list.indexOf(e + 1),e.nombre, `attack: ${e.attack}`)
+    });
+    const pick = prompt('Estos son los articulos, escribe su numero para comprarlo!')
+    obj.weapon = list
+
+
 }
-const stats = (s)  => {
+const stats = ()  => {
      
 }
