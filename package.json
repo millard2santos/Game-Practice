@@ -1,0 +1,24 @@
+{
+  "name": "game-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "npx tailwindcss -i ./style/style.css -o ./dist/output.css",
+    "watch": "npx tailwindcss -i ./style/style.css -o ./dist/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/millard2santos/Game-Practice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/millard2santos/Game-Practice/issues"
+  },
+  "homepage": "https://github.com/millard2santos/Game-Practice#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
+}

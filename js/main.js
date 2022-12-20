@@ -109,6 +109,7 @@ const combat = (enemy) => {
     if (enemy.Hp <= 0){
         alert(`Has derrotado a ${enemy.nombre}!! Pasas al nivel ${player.level + 1}`)
         player.level += 1
+        
         return 
     }
     const res = prompt(`Escoge tu accion: 1. Ataque normal
