@@ -57,3 +57,7 @@ dagger = {
 }]
 
 
+
+module.exports  = {
+    weapons
+}
